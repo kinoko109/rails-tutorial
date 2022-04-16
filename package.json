@@ -2,7 +2,7 @@
   "name": "rails_tutorial",
   "private": true,
   "scripts": {
-    "npm start": "rails server"
+    "start": "rails s"
   },
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
