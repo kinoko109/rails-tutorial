@@ -19,7 +19,7 @@ class ActiveSupport::TestCase
     session[:user_id] = user.id
   end
 
-  include ApplicationHelper
+  # include ApplicationHelper
 end
 
 class ActionDispatch::IntegrationTest
