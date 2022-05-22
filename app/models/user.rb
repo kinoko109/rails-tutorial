@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token
-  before_save { self.email = email.downcase } # selfは現在のユーザーを示す。（右式のselfを省略できる）
+  attr_accessor :remember_token, :activation_token
+  before_save :downcase_email # メソッド参照で実行
+  before_create :create_activation_digest # メソッド参照で実行
 
   validates :name, presence: true, length: { maximum: 50 } # validates(:name, presence: true, length: { maximum: 50 })の省略形
 
@@ -39,4 +40,16 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  private
+    # メールアドレスを小文字にする
+    def downcase_email
+      self.email = email.downcase
+    end
+
+    # 有効化トークンとダイジェストを作成及び代入する
+    def create_activation_digest
+      self.activation_token = User.new_token
+      self.activation_digest = User.digest(activation_token)
+    end
 end
