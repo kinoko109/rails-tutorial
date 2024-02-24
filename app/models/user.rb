@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   # { self.email = self.email.downcase }の省略形
   # before_save { self.email = email.downcase }
-  # 下記でもコールバックをかける（「!」は破壊的メソッドになる）
   before_save { email.downcase! }
+  # 下記でもコールバックをかける（「!」は破壊的メソッドになる）
   validates :name, presence:true, length: { maximum: 50 }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
