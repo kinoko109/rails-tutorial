@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   def show
+    puts "hoge@current_userddd"
+    puts @current_user
+    # puts
     @user = User.find(params[:id])
     # byebug gemのdebuggerメソッドを使うと、ターミナル上でリアルタイムでデバッグできる
     # debugger
@@ -12,6 +15,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      log_in @user
       flash[:success] = "Welcome to the Sample App!"
       # save function
       redirect_to @user
