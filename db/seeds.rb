@@ -5,3 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# メインのサンプルユーザーを一人追加
+# 「！」ユーザーが無効な場合にfalseを返すのではなく例外を発生させる
+User.create!(
+  name: "test",
+  email: "test@test.com",
+  password: "password",
+  password_confirmation: "password"
+)
+
+# 追加ユーザーをまとめて生成
+99.times do |value|
+  name = Faker::Name.name
+  email = "faker-#{value+1}@test.com"
+  password = "password"
+  User.create!(
+    name:  name,
+    email: email,
+    password: password,
+    password_confirmation: password
+    )
+end
