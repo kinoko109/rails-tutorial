@@ -12,7 +12,8 @@ User.create!(
   name: "test",
   email: "test@test.com",
   password: "password",
-  password_confirmation: "password"
+  password_confirmation: "password",
+  admin: true
 )
 
 # 追加ユーザーをまとめて生成
