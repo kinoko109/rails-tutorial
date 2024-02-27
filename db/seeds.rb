@@ -13,7 +13,9 @@ User.create!(
   email: "test@test.com",
   password: "password",
   password_confirmation: "password",
-  admin: true
+  admin: true,
+  activated: true,
+  activated_at: Time.zone.now
 )
 
 # 追加ユーザーをまとめて生成
@@ -22,9 +24,11 @@ User.create!(
   email = "faker-#{value+1}@test.com"
   password = "password"
   User.create!(
-    name:  name,
-    email: email,
-    password: password,
-    password_confirmation: password
+      name:  name,
+      email: email,
+      password: password,
+      password_confirmation: password,
+      activated: true,
+      activated_at: Time.zone.now
     )
 end
