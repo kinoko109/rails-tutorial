@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # Usersリソースに必要なアクションをすべて利用するように
   resources :users
 
+  resources :account_activations, only: [:edit]
+
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
