@@ -1,9 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# empty
 
-one:
-  content: MyText
-  user: one
+# # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-two:
-  content: MyText
-  user: two
+# one:
+#   content: MyText
+#   user: one
+
+# two:
+#   content: MyText
+#   user: two
