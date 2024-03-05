@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     puts @current_user
     # puts
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
     # byebug gemのdebuggerメソッドを使うと、ターミナル上でリアルタイムでデバッグできる
     # debugger
   end
