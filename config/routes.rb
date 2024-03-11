@@ -10,6 +10,12 @@ Rails.application.routes.draw do
 
   get '/signup', to: 'users#new'
 
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+
   # Usersリソースに必要なアクションをすべて利用するように
   resources :users
 
@@ -21,5 +27,7 @@ Rails.application.routes.draw do
 
   resources :microposts, only: [:create, :destroy]
   resources "password_resets", only: [:new, :create, :edit, :update]
+  resources :relationships, only: [:create, :destroy]
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
