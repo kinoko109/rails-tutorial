@@ -1,5 +1,12 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
+  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  # following配列の元はfollowed idの集合である、と明示的に指定
+  has_many :following, through: :active_relationships, source: :followed
+  # この場合、sourceを省略できるが、可読性のためあえて省略しない
+  has_many :followers, through: :passive_relationships, source: :follower
+
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
   before_create :create_activation_digest
@@ -74,6 +81,22 @@ class User < ApplicationRecord
   # 完全な実装は次章の「ユーザーをフォローする」を参照
   def feed
     Micropost.where("user_id = ?", id)
+  end
+
+  # ユーザーをフォロー
+  def follow(other_user)
+    # << で最後の位置に要素を追加
+    following << other_user
+  end
+
+  # ユーザーをフォロー解除
+  def unfollow(other_user)
+    active_relationships.find_by(followed: other_user.id).destroy
+  end
+
+  # 現在のユーザーがフォローしてたらtrueを返す
+  def following?(other_user)
+    following.include?(other_user)
   end
 
   private
